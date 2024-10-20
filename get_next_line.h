@@ -6,7 +6,7 @@
 /*   By: eteofilo <eteofilo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:26:48 by eteofilo          #+#    #+#             */
-/*   Updated: 2024/10/17 15:45:58 by eteofilo         ###   ########.fr       */
+/*   Updated: 2024/10/20 14:27:17 by eteofilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ typedef struct	s_list
 	struct s_list	*next;
 } t_list;
 
-char *get_next_line(int fd);
+char 	*get_next_line(int fd);
+char	*ft_strdup(char *src);
+char	*ft_strjoin(char const *s1, char const *s2);
+void	*ft_calloc(size_t nmemb, size_t size);
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstclear(t_list **lst, void (*del)(void *));

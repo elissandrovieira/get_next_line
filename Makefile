@@ -1,5 +1,6 @@
-NAME=libft.a
-SRC=
+NAME=get_next_line.a
+SRC=get_next_line.c \
+	get_next_line_utils.c
 OBJS=$(SRC:.c=.o)
 CC=cc
 CC_FLAGS=-Wall -Wextra -Werror
@@ -10,7 +11,7 @@ $(NAME): $(OBJS)
 	ar rc $@ $(OBJS)
 
 .c.o:
-	$(CC) $(CC_FLAGS) -c $< -o $@
+	$(CC) $(CC_FLAGS) -c $< -o $@ -D BUFFER_SIZE=1
 
 clean:
 	rm -rf $(OBJS)
@@ -22,7 +23,7 @@ re: fclean $(NAME)
 
 run:
 	clear
-	$(CC) $(CC_FLAGS) main.c -L. -l:libft.a -lbsd
+	$(CC) $(CC_FLAGS) main.c -L. -l:get_next_line.a -D BUFFER_SIZE=10000000
 	./a.out
 
 norm:
