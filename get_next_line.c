@@ -6,7 +6,7 @@
 /*   By: eteofilo <eteofilo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:44:20 by eteofilo          #+#    #+#             */
-/*   Updated: 2024/10/20 16:14:57 by eteofilo         ###   ########.fr       */
+/*   Updated: 2024/10/20 16:48:18 by eteofilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*get_buffer(int fd, char *str_print, char **str)
 				str_print = ft_strjoin(str_print, buff);
 				i++;
 				*str = ft_strdup(buff + i);
-				return(str_print);
+				return (str_print);
 			}
 			i++;
 		}
@@ -43,7 +43,7 @@ char	*get_buffer(int fd, char *str_print, char **str)
 	return (0);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
 	static char	*str;
 	char		*str_print;
@@ -51,7 +51,7 @@ char *get_next_line(int fd)
 	if (!str)
 	{
 		str = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-		if(!str)
+		if (!str)
 			return (0);
 		str_print = "\0";
 	}

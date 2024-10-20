@@ -23,7 +23,7 @@ re: fclean $(NAME)
 
 run:
 	clear
-	$(CC) $(CC_FLAGS) main.c -L. -l:get_next_line.a -D BUFFER_SIZE=10000000
+	$(CC) $(CC_FLAGS) main.c $(SRC) -D BUFFER_SIZE=10
 	./a.out
 
 norm:
