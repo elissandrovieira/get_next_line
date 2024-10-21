@@ -6,7 +6,7 @@
 /*   By: eteofilo <eteofilo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:44:20 by eteofilo          #+#    #+#             */
-/*   Updated: 2024/10/20 16:48:18 by eteofilo         ###   ########.fr       */
+/*   Updated: 2024/10/21 15:54:30 by eteofilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char	*get_buffer(int fd, char *str_print, char **str)
 	int			len;
 	int			i;
 	char		*buff;
+	char		*tmp;
 
 	len = 1;
 	buff = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
@@ -31,14 +32,16 @@ char	*get_buffer(int fd, char *str_print, char **str)
 			if (buff[i] == '\n')
 			{
 				buff[i] = '\0';
-				str_print = ft_strjoin(str_print, buff);
+				tmp = str_print;
+				str_print = ft_strjoin(tmp, buff);
 				i++;
-				*str = ft_strdup(buff + i);
+				*str = buff + i;
 				return (str_print);
 			}
 			i++;
 		}
-		str_print = ft_strjoin(str_print, buff);
+		tmp = str_print;
+		str_print = ft_strjoin(tmp, buff);
 	}
 	return (0);
 }
@@ -47,7 +50,9 @@ char	*get_next_line(int fd)
 {
 	static char	*str;
 	char		*str_print;
+	int			i;
 
+	i = 0;
 	if (!str)
 	{
 		str = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
@@ -56,6 +61,20 @@ char	*get_next_line(int fd)
 		str_print = "\0";
 	}
 	else
-		str_print = ft_strdup(str);
+	{
+		while (str[i] != 0)
+		{
+			if(str[i] == '\n')
+			{
+				str[i] = '\0';
+				str_print = str;
+				i++;
+				str = str + i;
+				return (str_print);
+			}
+			i++;
+		}
+		str_print = str;
+	}
 	return (get_buffer(fd, str_print, &str));
 }
