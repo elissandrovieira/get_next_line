@@ -6,7 +6,7 @@
 /*   By: eteofilo <eteofilo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:23:23 by eteofilo          #+#    #+#             */
-/*   Updated: 2024/10/20 16:41:36 by eteofilo         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:10:47 by eteofilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*ft_strdup(char *src)
 	return (dest);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2, int newl)
 {
 	int		size;
 	int		i;
@@ -88,6 +88,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char	*str;
 
 	size = ft_strlen(s1) + ft_strlen(s2);
+	if (newl == 1)
+		size++;
 	str = (char *)malloc((size + 1) * sizeof(char));
 	if (!str)
 		return (0);
@@ -100,6 +102,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	while (s2[j] != 0)
 		str[i++] = s2[j++];
+	if (newl == 1)
+		str[i++] = '\n';
 	str[i] = '\0';
 	return (str);
 }

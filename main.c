@@ -6,7 +6,7 @@
 /*   By: eteofilo <eteofilo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 12:03:33 by eteofilo          #+#    #+#             */
-/*   Updated: 2024/10/20 14:27:20 by eteofilo         ###   ########.fr       */
+/*   Updated: 2024/10/22 14:34:01 by eteofilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 int main(void)
 {
-	int	fd = open("luke_e_yoda.txt", O_RDONLY);
+	int	fd = open("1-brouette.txt", O_RDONLY);
 	char *str = get_next_line(fd);
-	printf("%s\n", str);
+	printf("%s", str);
 	while (str != 0)
 	{
 		str = get_next_line(fd);
