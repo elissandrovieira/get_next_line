@@ -6,7 +6,7 @@
 /*   By: eteofilo <eteofilo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:23:23 by eteofilo          #+#    #+#             */
-/*   Updated: 2024/10/22 17:10:47 by eteofilo         ###   ########.fr       */
+/*   Updated: 2024/10/23 15:48:40 by eteofilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	ft_bzero(void *s, size_t n)
 	}
 }
 
-static size_t	ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
@@ -80,7 +80,7 @@ char	*ft_strdup(char *src)
 	return (dest);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2, int newl)
+char	*ft_strjoin(char *s1, char *s2, int newl)
 {
 	int		size;
 	int		i;
@@ -88,13 +88,12 @@ char	*ft_strjoin(char const *s1, char const *s2, int newl)
 	char	*str;
 
 	size = ft_strlen(s1) + ft_strlen(s2);
-	if (newl == 1)
-		size++;
-	str = (char *)malloc((size + 1) * sizeof(char));
+	str = (char *)malloc((size + newl + 1) * sizeof(char));
 	if (!str)
 		return (0);
 	i = 0;
 	j = 0;
+
 	while (s1[i] != 0)
 	{
 		str[i] = s1[i];
@@ -104,6 +103,35 @@ char	*ft_strjoin(char const *s1, char const *s2, int newl)
 		str[i++] = s2[j++];
 	if (newl == 1)
 		str[i++] = '\n';
+	str[i] = '\0';
+	free(s1);
+	return (str);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	size_t	i;
+	size_t	size;
+	char	*str;
+
+	if (!s)
+		return (0);
+	size = ft_strlen(s);
+	if (start > size)
+	{
+		start = size;
+		size = 0;
+	}
+	else
+		size -= start;
+	if (size > len)
+		size = len;
+	str = (char *)malloc((size + 1) * sizeof(char));
+	if (!str)
+		return (0);
+	i = 0;
+	while (s[start] != 0 && i < size)
+		str[i++] = s[start++];
 	str[i] = '\0';
 	return (str);
 }
