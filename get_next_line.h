@@ -6,7 +6,7 @@
 /*   By: eteofilo <eteofilo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:26:48 by eteofilo          #+#    #+#             */
-/*   Updated: 2024/10/23 15:47:34 by eteofilo         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:52:14 by eteofilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	*ft_strjoin(char *s1, char *s2, int newl);
 void	*ft_calloc(size_t nmemb, size_t size);
 t_list	*ft_lstnew(void *content);
 size_t	ft_strlen(const char *s);
+void	ft_bzero(void *s, size_t n);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 

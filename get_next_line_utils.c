@@ -6,13 +6,13 @@
 /*   By: eteofilo <eteofilo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:23:23 by eteofilo          #+#    #+#             */
-/*   Updated: 2024/10/23 15:48:40 by eteofilo         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:52:15 by eteofilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static void	ft_bzero(void *s, size_t n)
+void	ft_bzero(void *s, size_t n)
 {
 	char	*s1;
 	char	*end;

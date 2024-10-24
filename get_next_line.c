@@ -104,13 +104,14 @@ char	*get_buffer(int fd, char *str_print, char **str)
 {
 	int		len;
 	int		i;
-	char	*buff;
+	char	*buff/*[BUFFER_SIZE + 1]*/;
 	char	*tmp;
 
 	len = 1;
 	buff = (char *)ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!buff)
 		return (0);
+	ft_bzero(buff, BUFFER_SIZE + 1);
 	while (len > 0)
 	{
 		len = read(fd, buff, BUFFER_SIZE);
@@ -119,21 +120,25 @@ char	*get_buffer(int fd, char *str_print, char **str)
 		{
 			if (buff[i] == '\n')
 			{
-				i++;
 				tmp = ft_substr(buff, 0, i);
+				i++;
 				str_print = ft_strjoin(str_print, tmp, 0);
-				*str = ft_substr(buff, i, ft_strlen(buff));
+				*str = ft_substr(buff, i, len);
 				free(tmp);
 				free(buff);
 				return (str_print);
 			}
 			else if (i == len)
-				return(buff);
+			{
+				str_print = ft_substr(buff, 0, i);
+				return(str_print);
+			}
 			i++;
 		}
 		str_print = ft_strjoin(str_print, buff, 1);
-
+		//free(buff);
 	}
+	free(*str);
 	free(buff);
 	free(str_print);
 	return (NULL);
@@ -141,16 +146,14 @@ char	*get_buffer(int fd, char *str_print, char **str)
 
 char	*get_next_line(int fd)
 {
-	static char	*str;
+	static char	*str = NULL;
 	char		*str_print;
 	char		*tmp;
 	int			i;
 
 	i = 0;
 	str_print = ft_calloc(1, sizeof(char));
-	if (!str)
-		str = "\0";
-	else
+	if (str)
 	{
 		while (str[i] != 0)
 		{
@@ -159,7 +162,7 @@ char	*get_next_line(int fd)
 				i++;
 				str_print = ft_substr(str, 0, i);
 				tmp = str;
-				str = ft_substr(str, i, ft_strlen(str));
+				str = ft_substr(str, i, ft_strlen(str) - i);
 				free(tmp);
 				return (str_print);
 			}
