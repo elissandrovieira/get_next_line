@@ -11,7 +11,7 @@ $(NAME): $(OBJS)
 	ar rc $@ $(OBJS)
 
 .c.o:
-	$(CC) $(CC_FLAGS) -c $< -o $@ -D BUFFER_SIZE=1
+	$(CC) $(CC_FLAGS) -c $< -o $@ -D BUFFER_SIZE=42
 
 clean:
 	rm -rf $(OBJS)
@@ -23,7 +23,7 @@ re: fclean $(NAME)
 
 run:
 	clear
-	$(CC) $(CC_FLAGS) main.c $(SRC) -D BUFFER_SIZE=1
+	$(CC) $(CC_FLAGS) main.c $(SRC) -D BUFFER_SIZE=42
 	./a.out
 
 norm:

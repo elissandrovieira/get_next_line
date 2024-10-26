@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eteofilo <eteofilo@student.42.rio>         +#+  +:+       +#+        */
+/*   By: eteofilo <eteofilo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:44:20 by eteofilo          #+#    #+#             */
-/*   Updated: 2024/10/26 00:48:47 by eteofilo         ###   ########.fr       */
+/*   Updated: 2024/10/26 15:18:42 by eteofilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	check_newl(char *str)
 	i = 0;
 	while (str[i] != 0 && str[i] != '\n')
 		i++;
-	if (str[i] == '\n')
-		return (i);
-	return (0);
+	if (i == 0 && str[i] != '\n')
+		i = -3;
+	return (i + 1);
 }
 
 char	*get_buffer(int fd, char *str_print, char **str)
@@ -52,9 +52,10 @@ char	*get_buffer(int fd, char *str_print, char **str)
 				str_print = ft_strjoin(str_print, tmp);
 				free(tmp);
 				tmp = *str;
-				*str = ft_substr(buff, i, ft_strlen(buff));
+				*str = ft_substr(buff, i, len - i);
 				free(tmp);
 				free(buff);
+				printf("\n is_print: %zu\n", ft_strlen(str_print));
 				return (str_print);
 			}
 			if (len == 0)
@@ -65,7 +66,9 @@ char	*get_buffer(int fd, char *str_print, char **str)
 			}
 			i++;
 		}
-		str_print = ft_strjoin(str_print, buff);
+		tmp = ft_substr(buff, 0, len);
+		str_print = ft_strjoin(str_print, tmp);
+		free(tmp);
 
 	}
 	free(buff);
@@ -82,12 +85,15 @@ char	*get_next_line(int fd)
 
 	str_print = ft_calloc(1, sizeof(char));
 	size = check_newl(str);
-	if (size < 0)
+	//printf("\nis_size: %d\n", size);
+	if (size == -1)
 		str = (char *)ft_calloc(1, sizeof(char));
 	else if (size > 0)
 	{
-		size++;
-		str_print = ft_substr(str, 0,size);
+		//size++;
+		tmp = str_print;
+		str_print = ft_substr(str, 0, size);
+		free(tmp);
 		tmp = str;
 		str = ft_substr(str,size, ft_strlen(str));
 		free(tmp);
