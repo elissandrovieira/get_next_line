@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eteofilo <eteofilo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eteofilo <eteofilo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:23:23 by eteofilo          #+#    #+#             */
-/*   Updated: 2024/10/24 16:52:15 by eteofilo         ###   ########.fr       */
+/*   Updated: 2024/10/26 00:33:08 by eteofilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*ft_strdup(char *src)
 	return (dest);
 }
 
-char	*ft_strjoin(char *s1, char *s2, int newl)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		size;
 	int		i;
@@ -88,7 +88,7 @@ char	*ft_strjoin(char *s1, char *s2, int newl)
 	char	*str;
 
 	size = ft_strlen(s1) + ft_strlen(s2);
-	str = (char *)malloc((size + newl + 1) * sizeof(char));
+	str = (char *)malloc((size + 1) * sizeof(char));
 	if (!str)
 		return (0);
 	i = 0;
@@ -101,8 +101,6 @@ char	*ft_strjoin(char *s1, char *s2, int newl)
 	}
 	while (s2[j] != 0)
 		str[i++] = s2[j++];
-	if (newl == 1)
-		str[i++] = '\n';
 	str[i] = '\0';
 	free(s1);
 	return (str);
