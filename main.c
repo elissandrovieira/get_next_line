@@ -6,7 +6,7 @@
 /*   By: eteofilo <eteofilo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 12:03:33 by eteofilo          #+#    #+#             */
-/*   Updated: 2024/10/26 14:52:51 by eteofilo         ###   ########.fr       */
+/*   Updated: 2024/10/27 11:24:41 by eteofilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int main(void)
 {
-	int	fd = open("./gnlTester/files/multiple_line_no_nl", O_RDONLY);
+	int	fd = open("./gnlTester/files/41_no_nl", O_RDONLY);
 	char *str = get_next_line(fd);
 	//char *str2 = get_next_line(fd);
 	//int i = ft_strlen(str);

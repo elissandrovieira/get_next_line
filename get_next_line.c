@@ -6,7 +6,7 @@
 /*   By: eteofilo <eteofilo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:44:20 by eteofilo          #+#    #+#             */
-/*   Updated: 2024/10/26 15:18:42 by eteofilo         ###   ########.fr       */
+/*   Updated: 2024/10/27 11:29:51 by eteofilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ int	check_newl(char *str)
 	if (i == 0 && str[i] != '\n')
 		i = -3;
 	return (i + 1);
+}
+
+void	to_free(char **str)
+{
+	free(*str);
+	*str = NULL;
 }
 
 char	*get_buffer(int fd, char *str_print, char **str)
@@ -50,29 +56,32 @@ char	*get_buffer(int fd, char *str_print, char **str)
 				i++;
 				tmp = ft_substr(buff, 0, i);
 				str_print = ft_strjoin(str_print, tmp);
-				free(tmp);
-				tmp = *str;
+				to_free(&tmp);
+				to_free(str);
 				*str = ft_substr(buff, i, len - i);
-				free(tmp);
-				free(buff);
-				printf("\n is_print: %zu\n", ft_strlen(str_print));
+				to_free(&buff);
 				return (str_print);
-			}
-			if (len == 0)
-			{
-				free(buff);
-				//free(*str);
-				return(str_print);
 			}
 			i++;
 		}
 		tmp = ft_substr(buff, 0, len);
 		str_print = ft_strjoin(str_print, tmp);
-		free(tmp);
-
+		to_free(&tmp);
 	}
-	free(buff);
-	free(str_print);
+	if (buff[0] != 0)
+	{
+		to_free(&buff);
+		to_free(str);
+		return (str_print);
+	}
+	to_free(&buff);
+	to_free(&str_print);
+	if (*str[0] != 0)
+	{
+		str_print = ft_substr(*str, 0, ft_strlen(*str));
+		to_free(str);
+		return (str_print);
+	}
 	return (NULL);
 }
 
@@ -85,25 +94,27 @@ char	*get_next_line(int fd)
 
 	str_print = ft_calloc(1, sizeof(char));
 	size = check_newl(str);
-	//printf("\nis_size: %d\n", size);
 	if (size == -1)
 		str = (char *)ft_calloc(1, sizeof(char));
 	else if (size > 0)
 	{
-		//size++;
+		if (str[size - 1] != '\n')
+		{
+			tmp = ft_substr(str, 0, ft_strlen(str));
+			to_free(&str_print);
+			str_print = get_buffer(fd, tmp, &str);
+			return (str_print);
+		}
 		tmp = str_print;
 		str_print = ft_substr(str, 0, size);
-		free(tmp);
+		to_free(&tmp);
 		tmp = str;
-		str = ft_substr(str,size, ft_strlen(str));
-		free(tmp);
+		str = ft_substr(str, size, ft_strlen(str));
+		to_free(&tmp);
 		return (str_print);
 	}
 	str_print = get_buffer(fd, str_print, &str);
 	if (str_print == NULL)
-	{
-		free(str);
-		str = NULL;
-	}
+		to_free(&str);
 	return (str_print);
 }
