@@ -6,7 +6,7 @@
 /*   By: eteofilo <eteofilo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:23:23 by eteofilo          #+#    #+#             */
-/*   Updated: 2024/10/26 14:23:26 by eteofilo         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:39:07 by eteofilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,26 +60,6 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (ptr);
 }
 
-char	*ft_strdup(char *src)
-{
-	int		i;
-	char	*dest;
-
-	i = 0;
-	if (src == 0)
-		return (0);
-	dest = (char *)malloc(sizeof(char) * (ft_strlen(src) + 1));
-	if (dest == 0)
-		return (0);
-	while (src[i] != 0)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
 char	*ft_strjoin(char *s1, char *s2)
 {
 	int		size;
@@ -103,6 +83,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		str[i++] = s2[j++];
 	str[i] = '\0';
 	free(s1);
+	//free(s2);
 	return (str);
 }
 

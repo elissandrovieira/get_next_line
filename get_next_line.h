@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eteofilo <eteofilo@student.42.rio>         +#+  +:+       +#+        */
+/*   By: eteofilo <eteofilo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:26:48 by eteofilo          #+#    #+#             */
-/*   Updated: 2024/10/26 00:29:26 by eteofilo         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:18:49 by eteofilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define BUFFER_SIZE 42
 # endif
 
+# include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
 
