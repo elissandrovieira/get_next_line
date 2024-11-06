@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eteofilo <eteofilo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eteofilo <eteofilo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:26:48 by eteofilo          #+#    #+#             */
-/*   Updated: 2024/10/31 11:18:49 by eteofilo         ###   ########.fr       */
+/*   Updated: 2024/11/06 11:39:51 by eteofilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,8 @@ typedef struct s_list
 }	t_list;
 
 char	*get_next_line(int fd);
-char	*ft_strdup(char *src);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char *s1, char *s2);
-void	*ft_calloc(size_t nmemb, size_t size);
-t_list	*ft_lstnew(void *content);
-size_t	ft_strlen(const char *s);
-void	ft_bzero(void *s, size_t n);
-void	ft_lstadd_back(t_list **lst, t_list *new);
-void	ft_lstclear(t_list **lst, void (*del)(void *));
+size_t	ft_strlen(char *s);
+int		check_nl(char *str);
 
 #endif

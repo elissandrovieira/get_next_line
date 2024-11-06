@@ -1,116 +1,73 @@
-/* ************************************************************************** */
+	/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eteofilo <eteofilo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eteofilo <eteofilo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/17 15:23:23 by eteofilo          #+#    #+#             */
-/*   Updated: 2024/10/31 14:39:07 by eteofilo         ###   ########.fr       */
+/*   Created: 2024/11/05 13:17:00 by eteofilo          #+#    #+#             */
+/*   Updated: 2024/11/05 13:17:00 by eteofilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	ft_bzero(void *s, size_t n)
-{
-	char	*s1;
-	char	*end;
-
-	s1 = (char *)s;
-	end = s1 + n;
-	while (s1 != end)
-	{
-		*s1 = '\0';
-		s1++;
-	}
-}
-
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(char *s)
 {
 	size_t	i;
 
 	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != 0)
+	while (s && s[i] && s[i] != '\n')
+		i++;
+	if (s && s[i] == '\n')
 		i++;
 	return (i);
 }
 
-void	*ft_calloc(size_t nmemb, size_t size)
-{
-	size_t	n;
-	char	*ptr;
-
-	if (nmemb == 0 || size == 0)
-	{
-		n = 1;
-	}
-	else
-	{
-		n = nmemb * size;
-		if (n / nmemb != size)
-			return (0);
-	}
-	ptr = (void *)malloc(n);
-	if (!ptr)
-		return (0);
-	ft_bzero(ptr, n);
-	return (ptr);
-}
-
 char	*ft_strjoin(char *s1, char *s2)
 {
-	int		size;
+	char	*str;
 	int		i;
 	int		j;
-	char	*str;
 
-	size = ft_strlen(s1) + ft_strlen(s2);
-	str = (char *)malloc((size + 1) * sizeof(char));
+	if (s2[0] == '\0')
+		return (0);
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
 		return (0);
 	i = 0;
-	j = 0;
-
-	while (s1[i] != 0)
+	while (s1 && s1[i])
 	{
 		str[i] = s1[i];
 		i++;
 	}
-	while (s2[j] != 0)
+	j = 0;
+	while (s2 && s2[j] && s2[j] != '\n')
 		str[i++] = s2[j++];
+	if (s2[j] == '\n')
+		str[i++] = '\n';
 	str[i] = '\0';
-	free(s1);
-	//free(s2);
+	if (s1)
+		free(s1);
 	return (str);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+int	check_nl(char *str)
 {
-	size_t	i;
-	size_t	size;
-	char	*str;
+	int	i;
+	int	j;
+	int	is_nl;
 
-	if (!s)
-		return (0);
-	size = ft_strlen(s);
-	if (start > size)
-	{
-		start = size;
-		size = 0;
-	}
-	else
-		size -= start;
-	if (size > len)
-		size = len;
-	str = (char *)malloc((size + 1) * sizeof(char));
-	if (!str)
-		return (0);
 	i = 0;
-	while (s[start] != 0 && i < size)
-		str[i++] = s[start++];
-	str[i] = '\0';
-	return (str);
+	j = 0;
+	is_nl = 0;
+	while (str[i])
+	{
+		if (is_nl)
+			str[j++] = str[i];
+		if (str[i] == '\n')
+			is_nl = 1;
+		str[i++] = '\0';
+	}
+	return (is_nl);
 }

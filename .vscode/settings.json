@@ -68,6 +68,7 @@
     "ranges": "c",
     "span": "c",
     "utility": "c",
-    "stdlib.h": "c"
+    "stdlib.h": "c",
+    "unistd.h": "c"
   }
 }

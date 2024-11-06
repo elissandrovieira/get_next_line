@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eteofilo <eteofilo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eteofilo <eteofilo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 12:03:33 by eteofilo          #+#    #+#             */
-/*   Updated: 2024/11/02 13:20:19 by eteofilo         ###   ########.fr       */
+/*   Updated: 2024/11/06 11:45:44 by eteofilo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int main(void)
 		str = get_next_line(fd);
 		printf("str: |%s|", str);
 	}
+	free(str);
 	close (fd);
 
 	//printf("%d\n", printf("%s",ft_strjoin("May the ", "Force be with you.", 1)));
